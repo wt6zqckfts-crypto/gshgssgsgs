@@ -8,23 +8,19 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-# آيدي الروم الصوتي
-VOICE_CHANNEL_ID = 1381313175850901505
+CHANNEL_ID = 1381313175850901505
 
 @bot.event
 async def on_ready():
-    print(f"Logged in as {bot.user.name}")
-    try:
-        channel = bot.get_channel(VOICE_CHANNEL_ID)
-        if channel and isinstance(channel, discord.VoiceChannel):
+    print(f'Logged in as {bot.user.name}')
+    channel = bot.get_channel(CHANNEL_ID)
+    if channel:
+        try:
             await channel.connect()
-            print(f"Connected to voice channel: {channel.name}")
-        else:
-            print("لم يتم العثور على الروم الصوتي، تأكد من الـ ID.")
-    except Exception as e:
-        print(f"خطأ أثناء الاتصال بالروم: {e}")
+            print("Successfully connected to the voice channel!")
+        except Exception as e:
+            print(f"Failed to connect: {e}")
+    else:
+        print("Voice channel not found.")
 
-# توكن البوت
-BOT_TOKEN = "MTU1OTQyODMyMjIyNjczMzE4OA.GCDNqB.938QsZ1awe0i1-pB_Qulwy8FdLLjBHEUIJXZAA"
-
-bot.run(BOT_TOKEN)
+bot.run('MTU1OTQyODMyMjIyNjczMzE4OA.G-n_0m.sfQRCjsofPaDz2QniWt102JtkolNBaaxWa2jwU')
